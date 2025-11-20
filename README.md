@@ -3,7 +3,8 @@ Control your DJI Tello with your Steamdeck
 
 ## Controls
 
-START: takeoff/land
+START: Takeoff
+SELECT: Land
 Horizontal movement: Use right axis
 Vertical + rotation: Use left axis
 
