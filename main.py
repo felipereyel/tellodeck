@@ -137,14 +137,6 @@ class FrontEnd(object):
         elif button_name == "SELECT":
             self.tello.land()
             self.send_rc_control = False
-        elif button_name == "UP":
-            self.tello.flip_forward()
-        elif button_name == "DOWN":
-            self.tello.flip_back()
-        elif button_name == "LEFT":
-            self.tello.flip_left()
-        elif button_name == "RIGHT":
-            self.tello.flip_right()
 
     def update(self):
         """Update routine. Send velocities to Tello."""
