@@ -1,6 +1,11 @@
 # tellodeck
 Control your DJI Tello with your Steamdeck
 
+## Setup
+
+Sync uv: `uv sync`
+Build: `uv run pyinstaller main.py`
+
 ## Controls
 
 START: Takeoff
