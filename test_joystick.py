@@ -1,22 +1,24 @@
 import pygame
 import argparse
-from joystick_map import get_button_name, BUTTON_MAPS
+from joystick_map import get_button_name, BUTTON_MAPS, AXIS_MAPS, get_axis_name
 
 
 def parse_args():
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(description="Test Pygame joystick inputs.")
     parser.add_argument(
-        "--buttons",
+        "--layout",
         type=str,
         default="default",
-        help="Specify the button map to use (e.g., '8BitDo', 'default').",
+        help="Specify the layout map to use (e.g., '8BitDo', 'default').",
     )
     return parser.parse_args()
 
 
-def run_joystick_test(button_map):
-    """Initialize Pygame and run the joystick test loop."""
+def run_joystick_test(layout: str):
+    button_map = BUTTON_MAPS[layout]
+    axis_map = AXIS_MAPS[layout]
+
     pygame.init()
     pygame.joystick.init()
 
@@ -44,8 +46,9 @@ def run_joystick_test(button_map):
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.JOYAXISMOTION:
+                axis_name = get_axis_name(event.axis, axis_map)
                 print(
-                    f"Joystick {event.joy} Axis {event.axis} moved to {event.value:.2f}"
+                    f"Joystick {event.joy} Axis {axis_name} moved to {event.value:.2f}"
                 )
             elif event.type == pygame.JOYBUTTONDOWN:
                 button_name = get_button_name(event.button, button_map)
@@ -64,9 +67,7 @@ def run_joystick_test(button_map):
 def main():
     """Main function to parse arguments and run the joystick test."""
     args = parse_args()
-    selected_button_map = BUTTON_MAPS[args.buttons]
-
-    run_joystick_test(selected_button_map)
+    run_joystick_test(args.layout)
 
 
 if __name__ == "__main__":
